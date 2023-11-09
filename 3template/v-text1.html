@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <hr>
+        <h2>{{message}}</h2>
+        <h1 v-text="message"></h1>  <!--vue.js 전용 속성, h1Obj.innerTest = medel.message와 같은 효과-->
+        <h1 v-html="message2"></h1>
+    </div>
+
+    <!-- 돔트리가 완성되고 나서 작동하도록 body태그 맨 밑에 써준다-->
+    <script src="http://unpkg.com/vue"></script>
+    <script>
+        const model = {message: "WELCOME", message2: '<a href="#">test</a>'}
+        let vm = Vue.createApp({ 
+                name: "App",
+                data(){ 
+                    return model
+                }
+            }).mount('#app')
+    </script>
+</body>
+</html>

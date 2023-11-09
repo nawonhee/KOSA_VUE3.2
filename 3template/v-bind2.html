@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>v-bind2.html</title>
+    </head>
+    <body>
+        <div id="app">
+            <img src="{{imgPath}}"> <!--이미지 태그는 바디요소가 없는 태그여서 효과가 나지 않는다-->
+            <img v-bind:src="imgPath">
+            <img :src="imgPath">
+        </div>
+
+        <script src="http://unpkg.com/vue"></script>
+        <script>
+            Vue.createApp({
+                name: "App",
+                data() {
+                    return {
+                        imgPath: "../images/logo.png"
+                    }
+                }
+            }).mount("#app")
+        </script>
+    </body>
+</html>

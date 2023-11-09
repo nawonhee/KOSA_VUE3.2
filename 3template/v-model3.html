@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="app">
+            {{name}}
+            <hr>
+            <input type="text" v-bind:value="name"> <!--단방향 바인딩-->
+            <hr>
+            <input type="text" v-model="name"> <!--양방향 바인딩-->
+        </div>
+
+        <script src="http://unpkg.com/vue"></script>
+        <script>
+            Vue.createApp({
+                name: "App",
+                data() {
+                    return {
+                        name:"나원희"
+                    }
+                }
+            }).mount("#app")
+        </script>
+    </body>
+</html>

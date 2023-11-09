@@ -6,21 +6,21 @@
             <h2>{{message}}</h2>
             <div>{{message}}</div>
             <hr>
-            <h3>{{name}}</h3>
+            <!--<h3>{{name}}</h3>-->
         </div>
         <script src="http://unpkg.com/vue"></script>
         <script>
             let model = {message:'WELCOME'}
-            let vm = Vue.createApp({
+            let vm = Vue.createApp({ 
                 name: "App",
-                data(){
-                    //return model
-                    return{
-                        message: 'WELCOME',
-                        name: 'NaWonHee'
-                    }
+                data(){ //proxy가 이미 내장되어 있기 때문에 간단하게 사용할 수 있다
+                    return model
+                    // return{
+                    //     message: 'WELCOME',
+                    //     name: 'NaWonHee'
+                    // }
                 }
-            }).mount('#app') //vm객체를 mount시켜라
+            }).mount('#app') //vm객체를 mount시켜라, getter메소드가 호출됨
         </script>
     </body>
 </html>
