@@ -11,6 +11,18 @@
             checked : false
         },
         // props : ["chk", "name"] //읽기 전용
+        // props:{  //부모가 전달해준 자료를 자식쪽에서 유효성검사하하기
+        //     chk:{
+        //         type : Boolean,
+        //         default : false,
+        //     },
+        //     name:{
+        //         validator(v){
+        //             return typeof(v) !== 'string'? false;
+        //                     v.trim().length>=4 ? true  : false
+        //         }
+        //     }
+        // }
         props: ["p"]
     }
 </script>
