@@ -9,12 +9,12 @@
         <div class="card-body">
           <div class="row mb-3">
             <div class="col">
-              <TodoInput @click="add"/>
+              <TodoInput @add-todo="addTodo"/>
             </div>
           </div>
           <div class="row">
             <div class="col">
-                <TodoList :todolist="todolist" @del="del" @upd="upd"/>
+                <TodoList :todolist="todolist" @delete-todo="delTodo" @upd="updTodo"/>
             </div>
           </div>
         </div>
