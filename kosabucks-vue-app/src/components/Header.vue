@@ -7,7 +7,14 @@
             <ul>
                 <li v-if="loginedId ===''"><router-link to="/login">로그인</router-link></li>
                 <li v-if="loginedId ===''"><router-link to="/signup">가입</router-link></li>
-                <li v-if="loginedId !==''"><a href="#" @click="logoutClickHandler()">{{loginedId}}님 로그아웃</a></li>
+                <template v-if="loginedId !== ''">
+                    <li><a href="#" class="intro">자기소개서</a></li>
+                    <!-- <li><img v-bind:src="profile" class="profile"></li> -->
+                    <li v-if="loginedId !==''"><a href="#" @click="logoutClickHandler()">{{loginedId}}님 로그아웃</a></li>
+                </template>
+                <li>
+                    <router-link class="nav-link" to="/productlist">상품목록</router-link>
+                </li>
                 <!-- <li><a href="#" class ="login">로그인</a></li>
                 <li><a href="#" class = "signup">가입</a></li>
 

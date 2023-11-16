@@ -27,11 +27,11 @@
                                      v-model="c.name"></label>
             </div>
             <div>
-                <!-- <label>프로필 :<input type="file" name="f1" id="f1"></label>
+                <label>프로필 :<input type="file" name="f1" id="f1" @change="profileChangeHandler"></label>
                 <div>
-                    <img class="profile">
+                    <img class="profile" v-bind:src="profile">
                 </div>
-                <label>자기소개서:<input type="file" name="f2" id="f2"></label> -->
+                <label>자기소개서:<input type="file" name="f2" id="f2"></label>
             </div>
             <div :class="[isBtSignup?'btSignupShow':'btSignupHide']">
                 <button type="submit" @click.prevent="signupFormSubmitHandler">가입하기</button>
@@ -71,7 +71,8 @@ import axios from 'axios'
                     id:'',
                     pwd:'',
                     name:''
-                }
+                },
+                profile:''
             }
         },
         methods:{
@@ -92,7 +93,7 @@ import axios from 'axios'
                         console.log(Error);
                     })
             },
-            signupFormSubmitHandler(){
+            signupFormSubmitHandler(e){
                 console.log(this.c.pwd)
                 console.log(this.pwd1)
                 if(this.c.pwd != this.pwd1){
@@ -102,8 +103,12 @@ import axios from 'axios'
                     pwdObj.select()
                 }else{
                     const url=`${this.backURL}/signup`
-                    const data= this.c
-                    axios.post(url,null,{params:data})
+                    // const data= this.c
+                    const fd = new FormData(e.target)
+                    const data = fd
+                    axios.post(url,data,{contentType:false, //파일첨부용 프로퍼티
+                                         processData:false //파일첨부용 프로퍼티 
+                                         }) 
                         .then((Response)=>{
                             if(Response.data.status==1){
                                 alert(Response.data.msg)
@@ -116,6 +121,10 @@ import axios from 'axios'
                             console.log(Error)
                         })
                 }
+            },
+            profileChangeHandler(e){
+                const url= URL.createObjectURL(e.target.files[0]) //<input> ty=e"file"> 선택된 파일자원
+                this.profile = url
             }
         }
     }
