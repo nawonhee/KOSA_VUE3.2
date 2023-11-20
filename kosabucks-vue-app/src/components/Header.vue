@@ -9,7 +9,7 @@
                 <li v-if="loginedId ===''"><router-link to="/signup">가입</router-link></li>
                 <template v-if="loginedId !== ''">
                     <li><a href="#" class="intro">자기소개서</a></li>
-                    <!-- <li><img v-bind:src="profile" class="profile"></li> -->
+                    <li><img v-show="profile" :src="profile" class="profile"></li>
                     <li v-if="loginedId !==''"><a href="#" @click="logoutClickHandler()">{{loginedId}}님 로그아웃</a></li>
                 </template>
                 <li>
@@ -35,6 +35,7 @@ import axios from 'axios'
         data(){
             return {
                 loginedId: '',
+                profile:''
             }
         },
         created(){
@@ -42,6 +43,18 @@ import axios from 'axios'
             if(loginedId != null){
                 this.loginedId = loginedId
             }
+            //---프로필 이미지 다운로드
+            const url = `${this.backURL}/download?id=${this.loginedId}&opt=profile`
+            axios.get(url,{responseType: 'blob'})
+                    .then(response=>{
+                        if(response.data.size>0){
+                            const blob = new Blob([response.data])
+                            const url = URL.createObjectURL(blob)
+                            this.profile=url
+                        }else{
+                            this.profile = ''
+                        }
+                    })
         },
         methods: {
             //--로고 img객체에서 클릭이벤트가 발생했을 때 할 일 start--

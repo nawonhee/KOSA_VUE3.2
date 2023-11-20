@@ -24,10 +24,12 @@
     import axios from 'axios'
     export default{
         name: 'ProductList',
+        // components: {ProductItem, PageGroup},
         data(){
             return {
                 productlist:[],
                 currentPage:'',
+                // pageGroup: null,
                 startPage:'',
                 endPage:'',
                 totalPage:''
@@ -37,6 +39,13 @@
             this.listHandler(1)
         },
         methods:{
+            // axiosHandler(){
+            //     const url=`${this.backURL}/productlistjson?currentPage=${this.currentPage}`
+            //     axios.get(url)
+            //         .then(response=>{
+            //             this.pageGroup = response.data
+            //         })
+            // }
             listHandler(cp){
                 const url = `${this.backURL}/productlistjson?currentPage=${cp}`
             axios.get(url)
@@ -66,7 +75,25 @@
                         console.log(Error)
                     })
             }
-        }
+        },
+        // watch:{ //라우트 변경 감지 (오버헤드 위험성, 퍼포먼스 떨어짐)
+        //     $route(newRoute, oldRoute){
+        //         console.log("라우터값이 변경"+newRoute.path+","+oldRoute.path)
+        //         if(newRoute.params.currentPage){
+        //             this.currentPage=newRoute.params.currentPage
+        //         }else{
+        //             this.currentPage=1
+        //         }
+        //         this.axiosHandler
+        //     }
+        // },
+        // created(){ //컴포넌트가 변경되었을 때만 호출함
+        //     if(this.$route.params.currentPage){
+        //         this.currentPage = this.$route.params.currentPage
+        //     }
+        //     this.axiosHandler(this.currentPage)
+        // }
+    
     }
 </script>
 <style scoped>
